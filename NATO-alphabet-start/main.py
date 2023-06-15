@@ -30,6 +30,13 @@ import pandas
 nato_data = pandas.read_csv('nato_phonetic_alphabet.csv')
 
 nato_dict = {row.letter: row.code for (index, row) in nato_data.iterrows()}
-user_request = input('Enter a word: ').upper()
-user_answer = [nato_dict[letter] for letter in user_request]
-print(user_answer)
+def generate_alphabet():
+    user_request = input('Enter a word: ').upper()
+    try:
+        user_answer = [nato_dict[letter] for letter in user_request]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please.")
+        generate_alphabet()
+    else:
+        print(user_answer)
+generate_alphabet()
